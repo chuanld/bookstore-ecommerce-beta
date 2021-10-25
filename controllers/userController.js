@@ -27,29 +27,32 @@ const userCtrl = {
         address,
         password: passwordHash,
       });
-      /* ---------This code for register basic------------
+      //  ---------This code for register basic------------
       //Save on cloud MongoDB
       await newUser.save();
+      res.json({ msg: "Register successfully. Login and come with us <3" });
 
       //Using jwt to authentication
-      const accesstoken = createAccessToken({ id: newUser._id });
-      const refreshtoken = createRefreshToken({ id: newUser._id });
+      // const accesstoken = createAccessToken({ id: newUser._id });
+      // const refreshtoken = createRefreshToken({ id: newUser._id });
 
-      res.cookie("refreshtoken", refreshtoken, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-      });
+      // res.cookie("refreshtoken", refreshtoken, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      // });
 
-      res.json({ accesstoken });
-*/
-      const activationtoken = createActivationToken(newUser);
+      // res.json({ accesstoken });
 
-      const url = `${CLIENT_URL}/user/activate/${activationtoken}`;
-      sendMail(email, url, "Verify your email to active account. Thanks you!");
+      // --------------- Register Email ---------------
+      // const activationtoken = createActivationToken(newUser);
 
-      res.json({
-        msg: "Wellcome u with us, please check your email to activate account",
-      });
+      // const url = `${CLIENT_URL}/user/activate/${activationtoken}`;
+      // sendMail(email, url, "Verify your email to active account. Thanks you!");
+
+      // res.json({
+      //   msg: "Wellcome u with us, please check your email to activate account",
+      // });
+      // --------------- /Register Email ---------------
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
